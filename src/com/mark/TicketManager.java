@@ -18,7 +18,7 @@ public class TicketManager {
     private static LinkedList<Ticket> resolvedTickets = new LinkedList<>();
 
     // Coordinating function.
-    private void mainMenu() {
+    protected void mainMenu() {
         // Continues till told to stop.
         while (true) {
             // Displays menu options and their selection code.
@@ -224,11 +224,10 @@ public class TicketManager {
         filer.fileWriter(resolvedTickets, filer.closeFile + currentDate + ".txt");
     }
 
-    public static void main(String[] args) {
-        // Creates new object and run its main method.
-        TicketManager manager = new TicketManager();
-        manager.mainMenu();
-    }
+//    public static void main(String[] args) {
+//        // Creates new object and run its main method.
+//        TicketManager manager = new TicketManager();
+//        manager.mainMenu();
+//    }
 
-    // TODO limit priority input range
 }

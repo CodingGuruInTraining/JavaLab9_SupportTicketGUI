@@ -3,6 +3,7 @@ package com.mark;
 public class Main {
 
     public static void main(String[] args) {
-	    TicketManagerGUI gui = new TicketManagerGUI();
+        // Creates GUI form.
+        TicketManagerGUI gui = new TicketManagerGUI();
     }
 }
