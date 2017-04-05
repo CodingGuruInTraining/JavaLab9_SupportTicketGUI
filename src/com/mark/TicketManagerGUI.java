@@ -1,6 +1,12 @@
 package com.mark;
 
 import javax.swing.*;
+import javax.swing.text.DateFormatter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by hl4350hb on 3/29/2017.
@@ -15,6 +21,8 @@ public class TicketManagerGUI extends JFrame {
     private JComboBox priorityComboBox;
     private JTextField reportedByTextField;
     private JTextField openDateTextField;
+
+    private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
     // Creates new ticket manager object.
     private TicketManager manager = new TicketManager();
@@ -32,7 +40,20 @@ public class TicketManagerGUI extends JFrame {
         }
 
 
+        closeTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        newTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                descriptionTextField.setEnabled(true);
+                reportedByTextField.setEnabled(true);
+                openDateTextField.setText(formatter.format(new Date()));
+            }
+        });
     }
 
 
