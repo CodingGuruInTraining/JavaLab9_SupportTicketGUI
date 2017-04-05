@@ -21,6 +21,7 @@ public class TicketManagerGUI extends JFrame {
     private JComboBox priorityComboBox;
     private JTextField reportedByTextField;
     private JTextField openDateTextField;
+    private JButton submitButton;
 
     private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -33,7 +34,7 @@ public class TicketManagerGUI extends JFrame {
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
+        submitButton.setVisible(false);
         String[] urgencies = {"1 - minor", "2", "3", "4", "5 - urgent"};
         for (int i = 0; i < urgencies.length; i++) {
             priorityComboBox.addItem(urgencies[i]);
@@ -49,9 +50,20 @@ public class TicketManagerGUI extends JFrame {
         newTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                newTicketButton.setVisible(false);
+                closeTicketButton.setVisible(false);
                 descriptionTextField.setEnabled(true);
+                priorityComboBox.setEnabled(true);
                 reportedByTextField.setEnabled(true);
                 openDateTextField.setText(formatter.format(new Date()));
+                submitButton.setVisible(true);
+                submitButton.setEnabled(true);
+            }
+        });
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
