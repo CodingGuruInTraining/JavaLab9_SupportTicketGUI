@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by hl4350hb on 3/29/2017.
@@ -42,8 +43,9 @@ public class TicketManagerGUI extends JFrame {
         }
         listModel = new DefaultListModel<String>();
         openTicketsList.setModel(listModel);
-
-
+        openTicketsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        LinkedList<Ticket> openTickets = manager.getTicketQueue();
+        for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
 
         closeTicketButton.addActionListener(new ActionListener() {
             @Override
