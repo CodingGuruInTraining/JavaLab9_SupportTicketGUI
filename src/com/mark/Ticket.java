@@ -68,7 +68,7 @@ public class Ticket {
     public String toString() {
         // Custom toString return value.
         return "Ticket ID: " + this.ticketID +
-                "\n\tIssue: " + this.description +
+                " Issue: " + this.description +
                 " Priority: " + this.urgency +
                 " Reported by: " + this.reportedBy +
                 " Reported on: " + this.openedDate;

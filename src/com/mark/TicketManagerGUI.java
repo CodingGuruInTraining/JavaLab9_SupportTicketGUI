@@ -56,14 +56,15 @@ public class TicketManagerGUI extends JFrame {
         newTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                newTicketButton.setVisible(false);
-                closeTicketButton.setVisible(false);
-                descriptionTextField.setEnabled(true);
-                priorityComboBox.setEnabled(true);
-                reportedByTextField.setEnabled(true);
-                openDateTextField.setText(formatter.format(new Date()));
-                submitButton.setVisible(true);
-                submitButton.setEnabled(true);
+//                newTicketButton.setVisible(false);
+//                closeTicketButton.setVisible(false);
+//                descriptionTextField.setEnabled(true);
+//                priorityComboBox.setEnabled(true);
+//                reportedByTextField.setEnabled(true);
+//                openDateTextField.setText(formatter.format(new Date()));
+//                submitButton.setVisible(true);
+//                submitButton.setEnabled(true);
+                disableFields(false);
 
 
 //                listModel.addElement();
@@ -76,7 +77,20 @@ public class TicketManagerGUI extends JFrame {
             }
         });
     }
-
+    private void disableFields(boolean disable) {
+        newTicketButton.setVisible(disable);
+        closeTicketButton.setVisible(disable);
+        descriptionTextField.setEnabled(!disable);
+        priorityComboBox.setEnabled(!disable);
+        reportedByTextField.setEnabled(!disable);
+        if (disable) {
+            openDateTextField.setText("");
+        } else {
+            openDateTextField.setText(formatter.format(new Date()));
+        }
+        submitButton.setVisible(!disable);
+        submitButton.setEnabled(!disable);
+    }
 
 
 
