@@ -22,6 +22,7 @@ public class TicketManagerGUI extends JFrame {
     private JTextField reportedByTextField;
     private JTextField openDateTextField;
     private JButton submitButton;
+    private DefaultListModel<String> listModel;
 
     private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -39,6 +40,9 @@ public class TicketManagerGUI extends JFrame {
         for (int i = 0; i < urgencies.length; i++) {
             priorityComboBox.addItem(urgencies[i]);
         }
+        listModel = new DefaultListModel<String>();
+        openTicketsList.setModel(listModel);
+
 
 
         closeTicketButton.addActionListener(new ActionListener() {
@@ -58,6 +62,9 @@ public class TicketManagerGUI extends JFrame {
                 openDateTextField.setText(formatter.format(new Date()));
                 submitButton.setVisible(true);
                 submitButton.setEnabled(true);
+
+
+//                listModel.addElement();
             }
         });
         submitButton.addActionListener(new ActionListener() {

@@ -12,10 +12,13 @@ import java.util.LinkedList;
 public class TicketManager {
     // Creates file manager object.
     private static TicketFileManager filer = new TicketFileManager();
+
     // Reads text file and generates a LinkedList with objects.
-    private static LinkedList<Ticket> ticketQueue = filer.fileReader(filer.openFile);
+    protected static LinkedList<Ticket> ticketQueue = filer.fileReader(filer.openFile);
     // Creates new list for resolved tickets.
     private static LinkedList<Ticket> resolvedTickets = new LinkedList<>();
+
+    public static LinkedList<Ticket> getTicketQueue() { return ticketQueue; }
 
     // Coordinating function.
     protected void mainMenu() {
