@@ -86,7 +86,13 @@ public class TicketManagerGUI extends JFrame {
 
                     Ticket t = (Ticket)openTicketsList.getSelectedValue();
 //                    Ticket t = (Ticket)listModel.getElementAt(listindex);
-
+                    String resolution = JOptionPane.showInputDialog("Enter Ticket's resolution:");
+                    while (resolution.equals("")) {
+                        resolution = JOptionPane.showInputDialog("Enter Ticket's resolution:");
+                        System.exit(0);
+                    }
+                    manager.closeTicket(t, resolution);
+                    refreshList();
                 }
                 else {
                     System.out.println("Need to select a Ticket to close.");

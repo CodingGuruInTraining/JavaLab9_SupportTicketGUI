@@ -180,9 +180,9 @@ public class TicketManager {
         return resultsList;
     }
 
-    protected void closeTicket(Ticket t) {
-        // Receives input from User.
-        String resolution = Input.getStringInput("How was the Ticket resolved?");
+    protected void closeTicket(Ticket t, String resolution) {
+//        // Receives input from User.
+//        String resolution = Input.getStringInput("How was the Ticket resolved?");
         // Generates a new Date object with the current date.
         Date closeDate = new Date();
         // Uses the Ticket's setters to update attributes.
