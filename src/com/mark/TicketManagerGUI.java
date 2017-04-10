@@ -69,20 +69,20 @@ public class TicketManagerGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
 //TODO add some validation to inputs
-                try {
+//                try {
                     String description = descriptionTextField.getText();
                     int priority = Integer.parseInt(priorityComboBox.getSelectedItem().toString().substring(0, 1));
                     String reporter = reportedByTextField.getText();
-                    Date dateReported = formatter.parse(openDateTextField.getText());
+                    Date dateReported = new Date();
                     manager.addTicket(description, priority, reporter, dateReported);
                     refreshList();
-                }
-                catch (ParseException err) {
-                    System.out.println("An error exists with the date formatting.");
-                }
-                finally {
+//                }
+//                catch (ParseException err) {
+//                    System.out.println("An error exists with the date formatting.");
+//                }
+//                finally {
                     disableFields(true);
-                }
+//                }
             }
         });
     }
@@ -103,6 +103,7 @@ public class TicketManagerGUI extends JFrame {
 
     private void refreshList() {
         LinkedList<Ticket> openTickets = manager.getTicketQueue();
+        listModel.clear();
         for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
     }
 
