@@ -61,6 +61,8 @@ public class TicketManagerGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 disableFields(false);
+                int availableID = Ticket.getStaticTicketIDCounter();
+                idTextField.setText(availableID + "");
             }
         });
         submitButton.addActionListener(new ActionListener() {
@@ -87,10 +89,12 @@ public class TicketManagerGUI extends JFrame {
                     Ticket t = (Ticket)openTicketsList.getSelectedValue();
 //                    Ticket t = (Ticket)listModel.getElementAt(listindex);
                     String resolution = JOptionPane.showInputDialog("Enter Ticket's resolution:");
+
                     while (resolution.equals("")) {
                         resolution = JOptionPane.showInputDialog("Enter Ticket's resolution:");
-                        System.exit(0);
+
                     }
+//                    System.exit(0);
                     manager.closeTicket(t, resolution);
                     refreshList();
                 }
@@ -124,3 +128,5 @@ public class TicketManagerGUI extends JFrame {
 
 
 }
+//helpful sites:
+//        http://www.homeandlearn.co.uk/java/java_option_panes.html

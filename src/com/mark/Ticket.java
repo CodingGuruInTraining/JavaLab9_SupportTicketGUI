@@ -17,6 +17,8 @@ public class Ticket {
     private String resolution;
     protected int ticketID;
 
+
+
     // Creates a static counter for all of this class' objects.
     // A static number is currently set as the starting point.
     private static int staticTicketIDCounter = 70001;
@@ -59,6 +61,7 @@ public class Ticket {
     protected Date getOpenedDate() { return this.openedDate; }
     protected String getResolution() { return this.resolution; }
     protected Date getClosedDate() { return this.closedDate; }
+    protected static int getStaticTicketIDCounter() { return staticTicketIDCounter; }
     // Setters.
     protected void setResolution(String res) { this.resolution = res; }
     protected void setClosedDate(Date closed) { this.closedDate = closed; }
