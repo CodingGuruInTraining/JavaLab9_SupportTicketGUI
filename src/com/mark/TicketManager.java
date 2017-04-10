@@ -1,5 +1,6 @@
 package com.mark;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -199,6 +200,12 @@ public class TicketManager {
         filer.fileWriter(ticketQueue, filer.openFile);
         // Creates a current date string and appends to resolved Ticket's text filename.
         String currentDate = new SimpleDateFormat("MMMM_dd_yyyy").format(new Date());
+        File temp = new File("./" + filer.closeFile + currentDate + ".txt");
+        if (temp.exists()) {
+            System.out.println("file already exists");
+        } else {
+            System.out.println("no such file");
+        }
         filer.fileWriter(resolvedTickets, filer.closeFile + currentDate + ".txt");
     }
 
