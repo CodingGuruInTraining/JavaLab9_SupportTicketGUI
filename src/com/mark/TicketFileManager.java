@@ -84,9 +84,9 @@ public class TicketFileManager {
     }
 
     // Writer method that uses the provided variables to create text file.
-    protected void fileWriter(LinkedList<Ticket> tickets, String filename) {
+    protected void fileWriter(LinkedList<Ticket> tickets, String filename, boolean appendTo) {
         // Adds writer object within exception handler.
-        try (BufferedWriter buffWriter = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter buffWriter = new BufferedWriter(new FileWriter(filename, appendTo))) {
             // Loops through all Tickets in provided list.
             for (Ticket t : tickets) {
                 // Writes a string of the Ticket's attributes with separators.

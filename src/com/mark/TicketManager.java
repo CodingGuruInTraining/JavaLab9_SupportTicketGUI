@@ -197,16 +197,19 @@ public class TicketManager {
 
     protected void exitEvent() {
         // Uses file manager's writing method to save all open Tickets to a text file.
-        filer.fileWriter(ticketQueue, filer.openFile);
+        filer.fileWriter(ticketQueue, filer.openFile, false);
         // Creates a current date string and appends to resolved Ticket's text filename.
         String currentDate = new SimpleDateFormat("MMMM_dd_yyyy").format(new Date());
-        File temp = new File("./" + filer.closeFile + currentDate + ".txt");
+        String filename = "./" + filer.closeFile + currentDate + ".txt";
+        File temp = new File(filename);
         if (temp.exists()) {
             System.out.println("file already exists");
+            filer.fileWriter(resolvedTickets, filename, true);
         } else {
             System.out.println("no such file");
+            filer.fileWriter(resolvedTickets, filename, false);
         }
-        filer.fileWriter(resolvedTickets, filer.closeFile + currentDate + ".txt");
+
     }
 
 //    public static void main(String[] args) {
@@ -216,3 +219,6 @@ public class TicketManager {
 //    }
 
 }
+
+//helpful sites:
+//        http://stackoverflow.com/questions/11220678/checking-if-file-exists-in-a-specific-directory
