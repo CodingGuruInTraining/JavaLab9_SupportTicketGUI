@@ -81,7 +81,15 @@ public class TicketManagerGUI extends JFrame {
         resolveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int listindex = openTicketsList.getSelectedIndex();
+                if (listindex >= 0) {
 
+//                    Ticket t = (Ticket)listModel.getElementAt(listindex);
+                }
+                else {
+                    System.out.println("Need to select a Ticket to close.");
+//TODO replace with pop-up
+                }
             }
         });
     }
