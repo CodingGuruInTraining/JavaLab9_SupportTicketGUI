@@ -5,6 +5,7 @@ import javax.swing.text.DateFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -44,8 +45,9 @@ public class TicketManagerGUI extends JFrame {
         listModel = new DefaultListModel<String>();
         openTicketsList.setModel(listModel);
         openTicketsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        LinkedList<Ticket> openTickets = manager.getTicketQueue();
-        for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
+//        LinkedList<Ticket> openTickets = manager.getTicketQueue();
+//        for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
+        refreshList();
 
         closeTicketButton.addActionListener(new ActionListener() {
             @Override
@@ -56,16 +58,8 @@ public class TicketManagerGUI extends JFrame {
         newTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                newTicketButton.setVisible(false);
-//                closeTicketButton.setVisible(false);
-//                descriptionTextField.setEnabled(true);
-//                priorityComboBox.setEnabled(true);
-//                reportedByTextField.setEnabled(true);
-//                openDateTextField.setText(formatter.format(new Date()));
-//                submitButton.setVisible(true);
-//                submitButton.setEnabled(true);
                 disableFields(false);
-
+//                manager.addTicket();
 
 //                listModel.addElement();
             }
@@ -74,6 +68,21 @@ public class TicketManagerGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+//TODO add some validation to inputs
+                try {
+                    String description = descriptionTextField.getText();
+                    int priority = Integer.parseInt(priorityComboBox.getSelectedItem().toString().substring(0, 1));
+                    String reporter = reportedByTextField.getText();
+                    Date dateReported = formatter.parse(openDateTextField.getText());
+                    manager.addTicket(description, priority, reporter, dateReported);
+                    refreshList();
+                }
+                catch (ParseException err) {
+                    System.out.println("An error exists with the date formatting.");
+                }
+                finally {
+                    disableFields(true);
+                }
             }
         });
     }
@@ -92,6 +101,10 @@ public class TicketManagerGUI extends JFrame {
         submitButton.setEnabled(!disable);
     }
 
+    private void refreshList() {
+        LinkedList<Ticket> openTickets = manager.getTicketQueue();
+        for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
+    }
 
 
 }

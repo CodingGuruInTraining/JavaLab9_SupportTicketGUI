@@ -32,7 +32,7 @@ public class TicketManager {
             // Decides what action to take based on input.
             switch (task) {
                 case 1:     // Entering new Ticket.
-                    addTicket();
+//                    addTicket();
                     break;
                 case 2:     // Deleting Ticket by its ID.
                     deleteByID();
@@ -57,39 +57,10 @@ public class TicketManager {
         }
     }
 
-    protected static void addTicket() {
-        // Sets initial variables.
-        boolean moreProblems = true;
-        String description;
-        String reporter;
-        Date dateReported = new Date();
-        int priority;
-
-        // Adds exception handler.
-        try {
-            // Loops until User no longer wants to enter new Tickets.
-            while (moreProblems) {
-                // Receives input from User.
-                description = Input.getStringInput("Enter problem:");
-                reporter = Input.getStringInput("Who reported this issue?:");
-                priority = Input.getPositiveIntInput("Enter priority of this issue (1 minor - 5 urgent:");
-                // Creates new Ticket with input values.
-                Ticket t = new Ticket(description, priority, reporter, dateReported);
-                // Adds new Ticket to list with all other open Tickets.
-                addTicketByPriority(t);
-
-                // Prompts User to continue or not.
-                String more = Input.getStringInput("More tickets? (Y/N)");
-                // Exits loop if N is entered.
-                if (more.equalsIgnoreCase("N")) {
-                    moreProblems = false;
-                }
-            }
-        }
-        // Catch for wrong data type entered.
-        catch (NumberFormatException err) {
-            System.out.println("Please enter a number for the priority.");
-        }
+    protected static void addTicket(String description, int priority, String reporter, Date dateReported) {
+        Ticket t = new Ticket(description, priority, reporter, dateReported);
+        // Adds new Ticket to list with all other open Tickets.
+        addTicketByPriority(t);
     }
 
     protected static void addTicketByPriority(Ticket newTicket) {
