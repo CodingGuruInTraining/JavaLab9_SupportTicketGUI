@@ -78,6 +78,7 @@ public class TicketManagerGUI extends JFrame {
                 manager.addTicket(description, priority, reporter, dateReported);
                 refreshList();
                 disableFields(true);
+                clearFields();
             }
         });
         resolveButton.addActionListener(new ActionListener() {
@@ -97,6 +98,7 @@ public class TicketManagerGUI extends JFrame {
 //                    System.exit(0);
                     manager.closeTicket(t, resolution);
                     refreshList();
+                    clearFields();
                 }
                 else {
                     System.out.println("Need to select a Ticket to close.");
@@ -126,6 +128,13 @@ public class TicketManagerGUI extends JFrame {
         for (Ticket t : openTickets) { listModel.addElement(t); }
     }
 
+    private void clearFields() {
+        idTextField.setText("");
+        descriptionTextField.setText("");
+        priorityComboBox.setSelectedIndex(0);
+        reportedByTextField.setText("");
+        openDateTextField.setText("");
+    }
 
 }
 //helpful sites:
