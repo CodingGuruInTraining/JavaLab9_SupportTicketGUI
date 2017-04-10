@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class TicketManagerGUI extends JFrame {
     private JPanel rootPanel;
-    private JList openTicketsList;
+    private JList<Ticket> openTicketsList;
     private JButton newTicketButton;
     private JButton closeTicketButton;
     private JTextField idTextField;
@@ -24,7 +24,7 @@ public class TicketManagerGUI extends JFrame {
     private JTextField openDateTextField;
     private JButton submitButton;
     private JButton resolveButton;
-    private DefaultListModel<String> listModel;
+    private DefaultListModel<Ticket> listModel;
 
     private DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -44,7 +44,7 @@ public class TicketManagerGUI extends JFrame {
         for (int i = 0; i < urgencies.length; i++) {
             priorityComboBox.addItem(urgencies[i]);
         }
-        listModel = new DefaultListModel<String>();
+        listModel = new DefaultListModel<Ticket>();
         openTicketsList.setModel(listModel);
         openTicketsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         refreshList();
@@ -84,6 +84,7 @@ public class TicketManagerGUI extends JFrame {
                 int listindex = openTicketsList.getSelectedIndex();
                 if (listindex >= 0) {
 
+                    Ticket t = (Ticket)openTicketsList.getSelectedValue();
 //                    Ticket t = (Ticket)listModel.getElementAt(listindex);
                 }
                 else {
@@ -111,7 +112,7 @@ public class TicketManagerGUI extends JFrame {
     private void refreshList() {
         LinkedList<Ticket> openTickets = manager.getTicketQueue();
         listModel.clear();
-        for (Ticket t : openTickets) { listModel.addElement(t.toString()); }
+        for (Ticket t : openTickets) { listModel.addElement(t); }
     }
 
 
