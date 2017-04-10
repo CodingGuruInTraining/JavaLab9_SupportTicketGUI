@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +38,23 @@ public class TicketManagerGUI extends JFrame {
         setContentPane(rootPanel);
         setPreferredSize(new Dimension(700,450));
         pack();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (JOptionPane.showConfirmDialog(rootPanel, "Do you really want to exit?", "Confirm Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    // close procedure
+                    System.out.println("Closing...");
+                    System.exit(0);
+                }
+                //                super.windowClosing(e);
+            }
+        });
+
+
         setVisible(true);
         submitButton.setVisible(false);
         resolveButton.setVisible(false);
@@ -107,6 +125,13 @@ public class TicketManagerGUI extends JFrame {
             }
         });
     }
+
+//    @Override
+//    public int getDefaultCloseOperation() {
+//        System.out.println("close opp: " + super.getDefaultCloseOperation());
+//        return super.getDefaultCloseOperation();
+//    }
+
     private void disableFields(boolean disable) {
         newTicketButton.setVisible(disable);
         closeTicketButton.setVisible(disable);
@@ -139,3 +164,4 @@ public class TicketManagerGUI extends JFrame {
 }
 //helpful sites:
 //        http://www.homeandlearn.co.uk/java/java_option_panes.html
+//http://stackoverflow.com/questions/9093448/do-something-when-the-close-button-is-clicked-on-a-jframe
