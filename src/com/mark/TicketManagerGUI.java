@@ -46,11 +46,10 @@ public class TicketManagerGUI extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (JOptionPane.showConfirmDialog(rootPanel, "Do you really want to exit?", "Confirm Close", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-                    // close procedure
+                    manager.exitEvent();
                     System.out.println("Closing...");
                     System.exit(0);
                 }
-                //                super.windowClosing(e);
             }
         });
 
