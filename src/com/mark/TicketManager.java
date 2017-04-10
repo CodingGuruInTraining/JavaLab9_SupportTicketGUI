@@ -21,41 +21,41 @@ public class TicketManager {
     public static LinkedList<Ticket> getTicketQueue() { return ticketQueue; }
 
     // Coordinating function.
-    protected void mainMenu() {
-        // Continues till told to stop.
-        while (true) {
-            // Displays menu options and their selection code.
-            System.out.println("1) Enter New Ticket\n2) Delete Ticket by ID\n3) Delete " +
-                    "Ticket by Issue\n4) Search by Issue\n5) Display Open Tickets\n6) Quit");
-            // Grabs User's input.
-            int task = Input.getPositiveIntInput("Enter your selection from list:");
-            // Decides what action to take based on input.
-            switch (task) {
-                case 1:     // Entering new Ticket.
-//                    addTicket();
-                    break;
-                case 2:     // Deleting Ticket by its ID.
-                    deleteByID();
-                    break;
-                case 3:     // Deleting Ticket by its Description.
-                    deleteByIssue();
-                    break;
-                case 4:     // Searches for Tickets with a phrase in its Description.
-                    searchByIssue();
-                    break;
-                case 5:     // Displays all open Tickets.
-                    printAllTickets(ticketQueue);
-                    break;
-                case 6:     // Exits program.
-                    System.out.println("Quitting program...goodbye");
-                    // Runs exit procedures.
-                    exitEvent();
-                    return;
-                default:
-                    break;
-            }
-        }
-    }
+//    protected void mainMenu() {
+//        // Continues till told to stop.
+//        while (true) {
+//            // Displays menu options and their selection code.
+//            System.out.println("1) Enter New Ticket\n2) Delete Ticket by ID\n3) Delete " +
+//                    "Ticket by Issue\n4) Search by Issue\n5) Display Open Tickets\n6) Quit");
+//            // Grabs User's input.
+//            int task = Input.getPositiveIntInput("Enter your selection from list:");
+//            // Decides what action to take based on input.
+//            switch (task) {
+//                case 1:     // Entering new Ticket.
+////                    addTicket();
+//                    break;
+//                case 2:     // Deleting Ticket by its ID.
+////                    deleteByID();
+//                    break;
+//                case 3:     // Deleting Ticket by its Description.
+//                    deleteByIssue();
+//                    break;
+//                case 4:     // Searches for Tickets with a phrase in its Description.
+//                    searchByIssue();
+//                    break;
+//                case 5:     // Displays all open Tickets.
+//                    printAllTickets(ticketQueue);
+//                    break;
+//                case 6:     // Exits program.
+//                    System.out.println("Quitting program...goodbye");
+//                    // Runs exit procedures.
+//                    exitEvent();
+//                    return;
+//                default:
+//                    break;
+//            }
+//        }
+//    }
 
     protected static void addTicket(String description, int priority, String reporter, Date dateReported) {
         Ticket t = new Ticket(description, priority, reporter, dateReported);
@@ -82,64 +82,68 @@ public class TicketManager {
         ticketQueue.addLast(newTicket);
     }
 
-    protected void deleteByID() {
-        // Displays all open Tickets.
-        printAllTickets(ticketQueue);
+    protected Ticket findByID(int deleteID) {
+//        // Displays all open Tickets.
+//        printAllTickets(ticketQueue);
         // Checks if list is empty before continuing.
         if (ticketQueue.size() == 0) {
-            System.out.println("There are no tickets to delete.");
-            return;
+            System.out.println("There are no tickets with that ID.");
+            return null;
         }
 
         // Sets a loop indicator variable.
         boolean foundID = false;
-        // Adds exception handler.
-        try {
-            // Loops until specific Ticket is found.
-            while (foundID == false) {
-                // Receives input from User.
-                int input = Input.getPositiveIntInput("Enter ID of Ticket to delete:");
+//        // Adds exception handler.
+//        try {
+//            // Loops until specific Ticket is found.
+//            while (foundID == false) {
+//                // Receives input from User.
+//                int input = Input.getPositiveIntInput("Enter ID of Ticket to delete:");
 
                 // Loops through list and compares input to each Ticket's ID.
                 for (Ticket t : ticketQueue) {
-                    if (t.getTicketID() == input) {
+                    if (t.getTicketID() == deleteID) {
                         foundID = true;
+
+                        return t;
+
                         // Sends Ticket to deletion function and displays message afterwards.
-                        closeTicket(t);
-                        System.out.println(String.format("Ticket %d has been deleted.", input));
-                        break;
+//                        closeTicket(t);
+//                        System.out.println(String.format("Ticket %d has been deleted.", input));
+//                        break;
                     }
                 }
                 // Displays message if ID was not found.
                 if (foundID == false) {
-                    System.out.println(String.format("Ticket %d was not found. Try again.", input));
+                    System.out.println(String.format("Ticket %d was not found. Try again.", deleteID));
                 }
+                return null;
             }
             // Displays all open Tickets again.
-            printAllTickets(ticketQueue);
-        }
-        catch (InputMismatchException err) {
-            // Catch for entering a non-integer for ID.
-            System.out.println("That is not a correct number format.");
-        }
-    }
+//            printAllTickets(ticketQueue);
+//        }
+//        catch (InputMismatchException err) {
+//            // Catch for entering a non-integer for ID.
+//            System.out.println("That is not a correct number format.");
+//        }
+//    }
 
-    protected void deleteByIssue () {
-        // Receives input from User.
-        String searchString = Input.getStringInput("Enter description of Issue to delete:");
-        // Sends input to function that searches list for partial matches and returns
-        // a separate list.
-        LinkedList<Ticket> results = searchDescription(searchString);
-        // Checks if more than one Ticket exists in new list.
-        if (results.size() > 1) {
-            System.out.println("Your search term is not specific enough to identify Ticket.");
-        }
-        else {
-            // Sends Ticket to deletion function and displays message afterwards.
-            closeTicket(results.get(0));
-            System.out.println("Ticket removed.");
-        }
-    }
+//    protected void deleteByIssue () {
+//        // Receives input from User.
+//        String searchString = Input.getStringInput("Enter description of Issue to delete:");
+//        // Sends input to function that searches list for partial matches and returns
+//        // a separate list.
+//        LinkedList<Ticket> results = searchDescription(searchString);
+//        // Checks if more than one Ticket exists in new list.
+//        if (results.size() > 1) {
+//            System.out.println("Your search term is not specific enough to identify Ticket.");
+//        }
+//        else {
+//            // Sends Ticket to deletion function and displays message afterwards.
+//            closeTicket(results.get(0));
+//            System.out.println("Ticket removed.");
+//        }
+//    }
 
     protected void searchByIssue() {
         // Receives input from User.
